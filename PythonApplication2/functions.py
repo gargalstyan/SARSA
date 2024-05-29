@@ -72,6 +72,20 @@ class SARSA_Learning:
          
         for indexS in range(self.stateNumber):
             self.learnedPolicy[indexS]=np.random.choice(np.where(self.Qmatrix[indexS]==np.max(self.Qmatrix[indexS]))[0])
-     
+            
+    def save_results_to_file(self, filename):
+        with open(filename, 'w') as file:
+            file.write("Hyperparameters:\n")
+            file.write(f"Alpha: {self.alpha}\n")
+            file.write(f"Gamma: {self.gamma}\n")
+            file.write(f"Epsilon: {self.epsilon}\n")
+            file.write(f"Number of Episodes: {self.numberEpisodes}\n")
+            file.write("\nQ-Table:\n")
+            for state in range(self.stateNumber):
+                file.write(f"State {state}: {self.format_q_values(self.Qmatrix[state])}\n")
+    
+    def format_q_values(self, q_values):
+        formatted_values = ["{:.6f}".format(value) if value != 0 else "0" for value in q_values]
+        return " ".join(formatted_values)
 
                 

@@ -7,20 +7,18 @@ from functions import SARSA_Learning
 env=gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=False)
 env.reset()
 
-env.observation_space
-  
-env.action_space
 
-
-alpha=0.1
-gamma=0.4
-epsilon=0.1
-numberEpisodes=1000 
+alpha = float(input("Enter the value for alpha: "))
+gamma = float(input("Enter the value for gamma: "))
+epsilon = float(input("Enter the value for epsilon: "))
+numberEpisodes = int(input("Enter the number of episodes: "))
  
 SARSA1= SARSA_Learning(env,alpha,gamma,epsilon,numberEpisodes)
 SARSA1.simulateEpisodes()
 SARSA1.computeFinalPolicy()
- 
+
+SARSA1.save_results_to_file('sarsa_results.txt')
+
 finalLearnedPolicy=SARSA1.learnedPolicy
 
  
